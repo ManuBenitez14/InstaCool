@@ -13,10 +13,18 @@ export default function reducer(state = {}){
 
 export const login = ({ email, password }: ILogin) =>
  async (dispatch: Dispatch, getState: () => any, { auth }: IServices) => {
-  const result = await auth.signInWithEmailAndPassword(email, password)
- // tslint:disable-next-line:no-console
-  console.log(result)
-  // tslint:disable-next-line:no-console
-  console.log(email)
+    await auth.signInWithEmailAndPassword(email, password)
+
 
 }
+
+export const register = ({email, password}: ILogin) =>
+    async (dispatch: Dispatch, getState: () => any, { auth, db }: IServices) =>{
+         
+           const userCredential = await auth.createUserWithEmailAndPassword(email,password)
+           const {user} = userCredential
+           const id = user ? user.uid : undefined
+           const doc = db.collection('users').doc(id)
+           await doc.set({ role: 'user' })
+           
+    }
