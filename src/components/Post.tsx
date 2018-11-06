@@ -5,8 +5,9 @@ import Footer from '../components/Footer'
 const style = {
     backgroundColor: '#fff',
     border: '1px solid #ddd',
+    marginBotton: '10px',
     padding: '10px 15px',
-    paddingBotton:'100px',
+    
 }
 
 interface IPostProps{
@@ -17,7 +18,7 @@ export default class Post extends React.Component<IPostProps>{
         const {image} = this.props
         return(
             <div style={style}>
-                <img src={image} />
+                <img style={{width: '400px'}} src={image} />
                 <Footer/>
             </div>
         )
