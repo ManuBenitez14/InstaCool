@@ -13,6 +13,8 @@ import * as postsDuck from '../../ducks/Posts'
 
 interface INewsfeedProps {
     fetchPosts: () => void
+    like: (a: string) => void
+    share: (a: string) => void
     fetched: boolean
     loading: boolean
     data: postsDuck.IDataPosts
@@ -29,6 +31,8 @@ class Newsfeed extends React.Component<INewsfeedProps>{
         }
         fetchPosts()
     }
+
+    
     public render(){
         const { data } = this.props
         // tslint:disable-next-line:no-console
@@ -39,11 +43,24 @@ class Newsfeed extends React.Component<INewsfeedProps>{
                     const post = data[x]
                     // tslint:disable-next-line:jsx-key
                     return <div key={x} style={{margin: '20px auto'}}>
-                    <Post image={post.imageURL}/></div>
+                    <Post 
+                    like={this.handleLike(x)}
+                    share={this.handleShare(x)} 
+                    image={post.imageURL}/>
+                    </div>
                 })}
             </Container>
         )
     }
+    private handleLike = (id: string) => () => {
+            const { like } = this.props
+            like(id)
+    }
+
+    private handleShare = (id: string) => () => {
+        const { share } = this.props
+        share(id)
+}
 }
 
 const mapStateToProps = (state: any) =>{
