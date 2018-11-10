@@ -12,6 +12,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "@google-cloud/functions-emulator": "^1.0.0-beta.5",
+    "express": "^4.16.4",
     "firebase-admin": "~6.0.0",
     "firebase-functions": "^2.1.0"
   },
